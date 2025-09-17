@@ -653,41 +653,62 @@ footer {
     padding: 0 10px;
 }
 
-/* Future Plans Section Responsiveness */
-.future-plans .grid-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
+/* Future Plans Section Responsiveness - FIXED CENTERING ISSUE */
+.future-plans {
+    background: rgba(255, 255, 255, 0.9) !important;
+    border-radius: 20px !important;
+    padding: 30px !important;
+    margin: 40px 0 !important;
+    box-shadow: 0 10px 30px rgba(255, 77, 77, 0.2) !important;
+    backdrop-filter: blur(10px) !important;
+    text-align: center !important;
 }
 
-.future-plans .grid-item {
-    text-align: center;
-    padding: 20px;
-    background: rgba(255, 255, 255, 0.7);
-    border-radius: 15px;
-    transition: transform 0.3s ease;
+.future-plans h2 {
+    text-align: center !important;
+    font-family: 'Dancing Script', cursive !important;
+    font-size: 2.2rem !important;
+    color: #ff4d4d !important;
+    margin-bottom: 30px !important;
 }
 
-.future-plans .grid-item:hover {
-    transform: translateY(-5px);
+.future-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)) !important;
+    gap: 25px !important;
+    justify-items: center !important;
 }
 
-.future-plans .grid-item i {
-    font-size: 2.2rem;
-    color: #ff4d4d;
-    margin-bottom: 15px;
-    display: block;
+.future-item {
+    text-align: center !important;
+    padding: 20px !important;
+    background: rgba(255, 255, 255, 0.7) !important;
+    border-radius: 15px !important;
+    transition: transform 0.3s ease !important;
+    max-width: 280px !important;
+    width: 100% !important;
 }
 
-.future-plans .grid-item h3 {
-    color: #d46a6a;
-    margin-bottom: 10px;
-    font-size: 1.2rem;
+.future-item:hover {
+    transform: translateY(-5px) !important;
 }
 
-.future-plans .grid-item p {
-    font-size: 0.95rem;
-    line-height: 1.5;
+.future-item i {
+    font-size: 2.2rem !important;
+    color: #ff4d4d !important;
+    margin-bottom: 15px !important;
+    display: block !important;
+}
+
+.future-item h3 {
+    color: #d46a6a !important;
+    margin-bottom: 10px !important;
+    font-size: 1.2rem !important;
+}
+
+.future-item p {
+    font-size: 0.95rem !important;
+    line-height: 1.5 !important;
 }
 
 /* Memory Cards Responsiveness */
@@ -798,8 +819,12 @@ button {
 }
 
 @media (max-width: 768px) {
-    .future-plans .grid-container {
-        grid-template-columns: 1fr;
+    .future-grid {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .future-item {
+        max-width: 100% !important;
     }
     
     .memory-img {
@@ -878,12 +903,12 @@ button {
         font-size: 2rem !important;
     }
     
-    .future-plans .grid-item {
-        padding: 15px;
+    .future-item {
+        padding: 15px !important;
     }
     
-    .future-plans .grid-item i {
-        font-size: 1.8rem;
+    .future-item i {
+        font-size: 1.8rem !important;
     }
     
     .memory-img {
@@ -918,4 +943,6 @@ button {
 iframe[data-testid="embed-iframe"] {
     max-width: 100%;
     border-radius: 12px;
+    display: block;
+    margin: 0 auto;
 }
