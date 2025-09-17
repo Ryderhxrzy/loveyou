@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="tl" translate="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google" content="notranslate">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unang Buwan Natin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="countdownOverlay" style="
+    position: fixed; top: 0; left: 0;
+    width: 100%; height: 100%;
+            background: linear-gradient(135deg, #ffe6e6 0%, #ffd6d6 25%, #ffb6c1 75%, #ffe6e6 100%);
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    text-align: center;
+    z-index: 9999;
+    font-family: 'Montserrat', sans-serif;
+    overflow: hidden;">
+    
+    <!-- Floating romantic decorations -->
+    <div style="position: absolute; top: 10%; left: 10%; font-size: 3rem; color: rgba(255, 77, 77, 0.3); animation: float 6s ease-in-out infinite;"><i class="fas fa-heart"></i></div>
+    <div style="position: absolute; top: 15%; right: 15%; font-size: 2.5rem; color: rgba(255, 158, 181, 0.4); animation: float 8s ease-in-out infinite reverse;"><i class="fas fa-rose"></i></div>
+    <div style="position: absolute; bottom: 20%; left: 12%; font-size: 2.8rem; color: rgba(255, 107, 107, 0.35); animation: float 7s ease-in-out infinite;"><i class="fas fa-star"></i></div>
+    <div style="position: absolute; bottom: 25%; right: 10%; font-size: 3.2rem; color: rgba(255, 182, 193, 0.3); animation: float 9s ease-in-out infinite reverse;"><i class="fas fa-candy-cane"></i></div>
+    <div style="position: absolute; top: 40%; left: 5%; font-size: 2.3rem; color: rgba(255, 77, 77, 0.25); animation: float 10s ease-in-out infinite;"><i class="fas fa-kiss-wink-heart"></i></div>
+    <div style="position: absolute; top: 50%; right: 8%; font-size: 2.6rem; color: rgba(255, 158, 181, 0.3); animation: float 11s ease-in-out infinite reverse;"><i class="fas fa-gift-heart"></i></div>
+    
+    <div style="position: relative; z-index: 2;">
+        <h1 style="
+            font-family: 'Dancing Script', cursive; 
+            font-size: 3.5rem; 
+            color: #ff4d4d; 
+            margin-bottom: 15px; 
+            text-shadow: 2px 2px 8px rgba(255, 77, 77, 0.3);
+            animation: pulse 2s ease-in-out infinite;">
+            <i class="fas fa-heart" style="margin-right: 15px; color: #ff9eb5;"></i>
+            Countdown to Our First Monthsary
+            <i class="fas fa-heart" style="margin-left: 15px; color: #ff9eb5;"></i>
+        </h1>
+        
+        <p style="
+            font-size: 1.3rem; 
+            color: #d46a6a; 
+            margin-bottom: 40px;
+            font-weight: 500;
+            text-shadow: 1px 1px 3px rgba(212, 106, 106, 0.3);">
+            <i class="fas fa-sparkles" style="margin-right: 8px;"></i>
+            Mga sandali nalang at makakasama na kita sa espesyal na araw na ito
+            <i class="fas fa-sparkles" style="margin-left: 8px;"></i>
+        </p>
+
+        <div id="countdownBoxes" style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; margin-bottom: 30px;"></div>
+
+        <p style="
+            margin-top: 25px; 
+            font-size: 1.2rem; 
+            color: #b34747;
+            font-style: italic;
+            animation: fadeInOut 3s ease-in-out infinite;">
+            <i class="fas fa-clock" style="margin-right: 8px;"></i>
+            Hintay ka lang, love... may surpresa ako
+            <i class="fas fa-gift" style="margin-left: 8px; color: #ff9eb5;"></i>
+        </p>
+    </div>
+    
+    <style>
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-20px) rotate(5deg); }
+            66% { transform: translateY(10px) rotate(-3deg); }
+        }
+    </style>
+</div>
+
+    <div class="hearts-container" id="heartsContainer"></div>
+    <div class="petals-container" id="petalsContainer"></div>
+
+    <!-- Decorative flowers with icons -->
+    <div class="flower flower-1"><i class="fas fa-seedling"></i></div>
+    <div class="flower flower-2"><i class="fas fa-leaf"></i></div>
+    <div class="flower flower-3"><i class="fas fa-cannabis"></i></div>
+    <div class="flower flower-4"><i class="fas fa-seedling"></i></div>
+    <div class="flower flower-5"><i class="fas fa-leaf"></i></div>
+    <div class="flower flower-6"><i class="fas fa-cannabis"></i></div>
+
+    <!-- Small flowers with icons -->
+    <div class="flower-small" style="top: 25%; left: 12%;"><i class="fas fa-spa"></i></div>
+    <div class="flower-small" style="top: 30%; right: 15%;"><i class="fas fa-spa"></i></div>
+    <div class="flower-small" style="bottom: 30%; left: 15%;"><i class="fas fa-spa"></i></div>
+    <div class="flower-small" style="bottom: 25%; right: 12%;"><i class="fas fa-spa"></i></div>
+
+    <!-- Music Control -->
+    <div class="music-control" id="musicControl">
+        <i class="fas fa-music"></i>
+    </div>
+
+    <div class="container">
+        <header>
+            <div class="heart" style="top: 20px; left: 20px; animation-delay: 0s;"><i class="fas fa-heart"></i></div>
+            <div class="heart" style="top: 40px; right: 30px; animation-delay: 1s;"><i class="fas fa-heart"></i></div>
+            <div class="heart" style="bottom: 30px; left: 40%; animation-delay: 2s;"><i class="fas fa-heart"></i></div>
+            <h1><i class="fas fa-heart" style="margin-right: 15px; color: #ff9eb5;"></i>Happy First Monthsary, KEI Mahal!<i class="fas fa-heart" style="margin-left: 15px; color: #ff9eb5;"></i></h1>
+            <p><i class="fas fa-calendar-heart" style="margin-right: 8px;"></i>Isang buwang puno ng pagmamahalan — sana magustuhan mo, mahal ko.<i class="fas fa-calendar-heart" style="margin-left: 8px;"></i></p>
+        </header>
+
+        <!-- Welcome Message Section -->
+        <section class="welcome-section" style="
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            box-shadow: 0 10px 30px rgba(255, 77, 77, 0.2);
+            text-align: center;
+            backdrop-filter: blur(10px);">
+
+            <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.8rem; color: #ff4d4d; margin-bottom: 20px;">
+                <i class="fas fa-heart" style="margin-right: 10px;"></i>
+                From KAI's Heart to KEI's Soul
+                <i class="fas fa-heart" style="margin-left: 10px;"></i>
+            </h2>
+
+            <p style="font-size: 1.2rem; line-height: 1.8; color: #666; max-width: 800px; margin: 0 auto;">
+                <i class="fas fa-quote-left" style="color: #ff9eb5; margin-right: 8px;"></i>
+                Sa loob ng isang buwan ng ating pagmamahalan, mahal, napakarami kong natutunan — isa na rito ang tunay na kahulugan ng pag-ibig. 
+                Ang pag-ibig pala ay hindi lang tungkol sa mga sweet messages HAHAHA, kundi tungkol din sa mga maliliit na bagay na ginagawa natin para sa isa’t isa araw-araw. 
+                Yung bawat message mo, bawat tawag, at bawat oras na sinasamahan mo ako kahit sa simpleng panonood lang habang nagwo-work ako, sobrang na-aappreciate ko. 
+                Ramdam na ramdam ko kung gaano ako ka-importante sayo at kung gaano mo ako kamahal. 
+                Maraming salamat sayo, mahal, lalo na sa iyong kabaitan at sa walang sawang pagpaparamdam sa akin kung gaano ako kahalaga at gaano mo ako kamahal.
+                <i class="fas fa-quote-right" style="color: #ff9eb5; margin-left: 8px;"></i>
+            </p>
+        </section>
+        
+        <hr class="memory-divider">
+
+        <!-- Journey Timeline Section -->
+        <section class="timeline-section" style="margin: 60px 0;">
+            <h2 style="text-align: center; font-family: 'Dancing Script', cursive; font-size: 2.5rem; color: #ff4d4d; margin-bottom: 40px;">
+                <i class="fas fa-music" style="margin-right: 10px;"></i>Our Favorite Music Playlist<i class="fas fa-music" style="margin-left: 10px;"></i>
+            </h2>
+            
+            <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/1e4zdUkhOZO63XZzWy2yx7?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>        
+        </section>
+        
+        <hr class="memory-divider">
+
+        <section class="welcome-section" style="
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            box-shadow: 0 10px 30px rgba(255, 77, 77, 0.2);
+            text-align: center;
+            backdrop-filter: blur(10px);">
+
+             <h2 class="reason-title">30 Reasons Why I Love Ysou</h2>
+            <p>30 muna ngayon, pero sa bawat araw na lumilipas, mas dumarami pa ang dahilan kung bakit kita mahal HAHAHA :></p>
+
+            <button class="reason-display-btn" id="reasonDisplayBtn">
+                <i class="fas fa-heart"></i> View
+            </button>
+
+            <div class="single-reason" id="singleReason"></div>
+        </section>
+
+        <hr class="memory-divider">
+
+        <h2 style="text-align: center; font-family: 'Dancing Script', cursive; font-size: 2.5rem; color: #ff4d4d; margin-bottom: 40px;">
+                <i class="fas fa-route" style="margin-right: 10px;"></i>Our Journey So Far<i class="fas fa-route" style="margin-left: 10px;"></i>
+            </h2>
+        <section class="memories">
+            
+            <div class="memory-card">
+                <div class="memory-img">
+                    <i class="fas fa-message" style="font-size: 3.5rem; color: #ff4d4d;"></i>
+                </div>
+                <div class="memory-content">
+                    <h3><i class="fas fa-comment-dots" style="margin-right: 8px; color: #ff9eb5;"></i>First Meet</h3>
+                    <p>Ang araw na sinundo kita sa airport — ang simula ng ating kwento.  
+                        Tandang-tanda ko pa yung araw na yon mahal HAHAHA.  
+                        Grabe, hindi ko inexpect na magiging close tayo agad, pero nung unang pag-uusap natin,  
+                        gumaan agad ang pakiramdam ko sayo at parang na love at first talk ata ako HAHAHA
+                    </p>
+                </div>
+            </div>
+            
+            <div class="memory-card">
+                <div class="memory-img">
+                    <i class="fas fa-moon" style="font-size: 3.5rem; color: #ff4d4d;"></i>
+                </div>
+                <div class="memory-content">
+                    <h3><i class="fas fa-clock" style="margin-right: 8px; color: #ff9eb5;"></i>Late Night Talks</h3>
+                    <p style="line-height: 1.6;">
+                        Yung mga gabi na hanggang umaga tayo nag-uusap, nagkukwentuhan, at nagtatawanan —
+                        hinding-hindi ko makakalimutan yon mahal HAHAHA. 
+                        Tandang-tanda ko pa yung isang gabi na nagkwentuhan tayo hanggang 3AM,
+                        sobrang saya ko nung oras na yon.  
+                        Ang saya-saya kahit na hindi tayo magkasama, nakakapag-usap pa rin tayo ng ganun katagal.  
+                        Kahit hindi pa tayo noon, ramdam na ramdam ko na special ako sayo HAHAHA.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="memory-card">
+                <div class="memory-img">
+                    <i class="fas fa-heart-circle-plus" style="font-size: 3.5rem; color: #ff4d4d;"></i>
+                </div>
+                <div class="memory-content">
+                    <h3><i class="fas fa-smile-beam" style="margin-right: 8px; color: #ff9eb5;"></i>The Confession</h3>
+                    <p style="line-height: 1.6;">
+                        August 22, 2025 — ang araw na nagbago ang lahat.  
+                        Dito ko na talaga nilakasan ang loob ko para sabihin sayo ang tunay kong nararamdaman, mahal,  
+                        kahit na sobrang kabado ako nung araw na yon HAHAHA. 
+                        Hindi ko alam kung paano ko sisimulan, pero ayun… nasabi ko rin sa wakas.  
+                        Sobrang saya ko nung oras na yon kasi nalaman ko na parehas pala tayo ng nararamdaman.  
+                        Akala ko noon hindi mo rin ako gusto, kaya hindi ako nagbabalak na umamin dati HAHAHA.  
+                        Hinintay ko talaga yung tamang araw at pagkakataon — at buti na lang, magkasama tayo nun.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Additional Memory Cards -->
+            <div class="memory-card">
+                <div class="memory-img">
+                    <i class="fas fa-calendar-day" style="font-size: 3.5rem; color: #ff4d4d;"></i>
+                </div>
+                <div class="memory-content">
+                    <h3><i class="fas fa-headphones" style="margin-right: 8px; color: #ff9eb5;"></i>Our First Month</h3>
+                    <p style="line-height: 1.6;">
+                        Ngayon, nakaabot na tayo sa unang buwan ng ating pagmamahalan — ang ating unang milestone. Sana hindi ka magsawang mahalin at unawain ako, lalo na sa mga araw na namimiss kita at nalulungkot ako. Sana marami pa tayong buwan, taon, at mga espesyal na moments na pagsasamahan nating dalawa.
+                    </p>                
+                </div>
+            </div>
+        </section>
+
+        <hr class="memory-divider">
+        
+        <section class="love-letter">
+            <div style="text-align: center; margin-bottom: 30px;">
+                <i class="fas fa-envelope-heart" style="font-size: 3rem; color: #ff4d4d; margin-bottom: 15px;"></i>
+                <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.5rem; color: #ff4d4d;">A Letter From KEI to KAI</h2>
+            </div>
+            
+            <div style="font-size: 1.1rem; line-height: 1.8; color: #555;">
+                <p><span style="font-size: 1.3rem; color: #ff4d4d; font-weight: bold;">Mahal kong KAI,</span></p>
+                
+                <p><i class="fas fa-heart" style="color: #ff9eb5; margin-right: 5px;"></i>Sa pagdiriwang ng ating unang buwan, nais kong ipaalam sa iyo kung gaano ako nagpapasalamat na ikaw ay nasa buhay ko. Kahit na magkalayo tayo, ang pagmamahal ko para sa iyo ay walang hangganan at patuloy na lumalaki araw-araw.</p>
+                
+                <p><i class="fas fa-gem" style="color: #ff9eb5; margin-right: 5px;"></i>Bawat mensahe, bawat tawag, bawat sandaling magkasama tayo ay kayamanan na itatatago ko malapit sa aking puso. Ipinakita mo sa akin na ang tunay na koneksyon ay lumalampas sa pisikal na presensya, at ang pag-ibig ay maaaring lumago kahit sa pinakamalayong distansya.</p>
+                
+                <p><i class="fas fa-star" style="color: #ff9eb5; margin-right: 5px;"></i>Pinahahalagahan ko ang iyong kabaitan, iyong katalinuhan, iyong magandang diwa, at ang paraan ng iyong pagpaparamdam sa akin na ako'y importante at naiintindihan. Iniintay ko ang araw na maari kitang mahawakan, ngunit hanggang sa dumating iyon, alamin mong hawak mo ang puso ko.</p>
+                
+                <p><i class="fas fa-infinity" style="color: #ff9eb5; margin-right: 5px;"></i>Maligayang unang buwan, mahal kong KAI. Narito para sa marami pang mga buwan at sa kalaunan ay isang buong buhay na magagandang sandaling magkasama.</p>
+                
+                <div style="text-align: right; margin-top: 30px; font-size: 1.2rem;">
+                    <p style="color: #d46a6a;">Pag-ibig mo,</p>
+                    <p style="font-family: 'Dancing Script', cursive; font-size: 2rem; color: #ff4d4d; margin-top: 10px;">
+                        <i class="fas fa-signature" style="margin-right: 10px;"></i>KEI<i class="fas fa-heart" style="margin-left: 10px;"></i>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <hr class="memory-divider">
+        
+        <!-- Future Plans Section -->
+        <section class="future-plans" style="
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 60px 0;
+            box-shadow: 0 10px 30px rgba(255, 77, 77, 0.2);
+            backdrop-filter: blur(10px);">
+            
+            <h2 style="text-align: center; font-family: 'Dancing Script', cursive; font-size: 2.5rem; color: #ff4d4d; margin-bottom: 30px;">
+                <i class="fas fa-road" style="margin-right: 10px;"></i>Our Future Together<i class="fas fa-road" style="margin-left: 10px;"></i>
+            </h2>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px;">
+                <div style="text-align: center; padding: 20px;">
+                    <i class="fas fa-calendar-plus" style="font-size: 2.5rem; color: #ff4d4d; margin-bottom: 15px;"></i>
+                    <h3 style="color: #d46a6a; margin-bottom: 10px;">More Monthsaries</h3>
+                    <p>Mag-celebrate tayo ng 2nd, 3rd, at marami pang monthsaries. Bawat isa ay may bagong mga memories na makakasama natin.</p>
+                </div>
+                
+                <div style="text-align: center; padding: 20px;">
+                    <i class="fas fa-video" style="font-size: 2.5rem; color: #ff4d4d; margin-bottom: 15px;"></i>
+                    <h3 style="color: #d46a6a; margin-bottom: 10px;">Video Calls</h3>
+                    <p>Sana makita kita nang mas madalas sa video calls. Gusto ko makita ang tunay na ngiti mo, hindi lang sa pictures.</p>
+                </div>
+                
+                <div style="text-align: center; padding: 20px;">
+                    <i class="fas fa-plane-departure" style="font-size: 2.5rem; color: #ff4d4d; margin-bottom: 15px;"></i>
+                    <h3 style="color: #d46a6a; margin-bottom: 10px;">Meet in Person</h3>
+                    <p>Ang pinakahinihintay ko - ang araw na magkikita tayo personally. Yung mahawakan kita at ma-hug ka nang tunay.</p>
+                </div>
+                
+                <div style="text-align: center; padding: 20px;">
+                    <i class="fas fa-heart-circle-plus" style="font-size: 2.5rem; color: #ff4d4d; margin-bottom: 15px;"></i>
+                    <h3 style="color: #d46a6a; margin-bottom: 10px;">Growing Together</h3>
+                    <p>Magkasamang lumago, magkasamang harapin ang mga pagsubok, at magkasamang mag-celebrate ng mga tagumpay.</p>
+                </div>
+            </div>
+        </section>
+
+        <hr class="memory-divider">
+
+        <!-- Interactive Love Messages -->
+        <section class="love-messages" style="
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            box-shadow: 0 10px 30px rgba(255, 77, 77, 0.2);
+            text-align: center;
+            backdrop-filter: blur(10px);">
+            
+            <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.5rem; color: #ff4d4d; margin-bottom: 30px;">
+                <i class="fas fa-envelope-heart" style="margin-right: 10px;"></i>Random Love Messages<i class="fas fa-envelope-heart" style="margin-left: 10px;"></i>
+            </h2>
+            
+            <p style="margin-bottom: 25px; font-size: 1.1rem;">Click the button to receive a sweet message from me!</p>
+            
+            <button id="loveMessageBtn" style="
+                background: linear-gradient(135deg, #ff4d4d, #ff9eb5);
+                color: white;
+                border: none;
+                padding: 15px 35px;
+                font-size: 1.1rem;
+                border-radius: 50px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                box-shadow: 0 8px 20px rgba(255, 77, 77, 0.3);
+                margin-bottom: 25px;">
+                <i class="fas fa-heart" style="margin-right: 8px;"></i>Get Sweet Message
+            </button>
+            
+            <div id="randomMessage" style="
+                display: none;
+                background: rgba(255, 240, 240, 0.8);
+                padding: 25px;
+                border-radius: 15px;
+                margin-top: 20px;
+                font-size: 1.1rem;
+                font-style: italic;
+                color: #d46a6a;
+                border-left: 4px solid #ff4d4d;"></div>
+        </section>
+        <hr class="memory-divider">
+        <!-- Virtual Kiss Section -->
+        <section class="interactive">
+            <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.5rem; color: #ff4d4d; margin-bottom: 20px;">
+                <i class="fas fa-kiss-wink-heart" style="margin-right: 10px;"></i>Send Me a Virtual Kiss!<i class="fas fa-kiss-wink-heart" style="margin-left: 10px;"></i>
+            </h2>
+            <p style="margin-bottom: 25px; font-size: 1.1rem;">Pindutin mo yung button gamit ang labi mahal HAHAHHAHA emee. Kiss mo ako yung may tunog ha</p>
+            <button class="kiss-btn" onclick="sendKiss()">
+                <i class="fas fa-heart"></i> Kiss me
+            </button>
+            <p id="kiss-message" style="margin-top: 20px; font-style: italic; display: none;">
+                <i class="fas fa-heart-circle-check" style="color: #ff4d4d; margin-right: 8px;"></i>Yieeeeee HAHAHHAHA I Love You Padaba koo<i class="fas fa-heart-circle-check" style="color: #ff4d4d; margin-left: 8px;"></i>
+            </p>
+        </section>
+        <hr class="memory-divider">
+
+        <footer style="text-align: center; padding: 40px; margin-top: 60px; color: #d46a6a;">
+            <div style="margin-bottom: 20px;">
+                <i class="fas fa-heart" style="font-size: 2rem; color: #ff4d4d; margin: 0 10px;"></i>
+                <i class="fas fa-infinity" style="font-size: 2rem; color: #ff9eb5; margin: 0 10px;"></i>
+                <i class="fas fa-heart" style="font-size: 2rem; color: #ff4d4d; margin: 0 10px;"></i>
+            </div>
+            <p style="font-size: 1.1rem; margin-bottom: 10px;">
+                <i class="fas fa-code" style="margin-right: 8px;"></i>Para sa pinakamamahal kong girlfriend, KEI <i class="fas fa-heart" style="color: #ff4d4d; margin: 0 5px;"></i>
+            </p>
+            <p style="font-size: 1rem; line-height: 1.6;">
+    <i class="fas fa-quote-left" style="color: #ff9eb5; margin-right: 5px;"></i>
+    Kahit malayo tayo, ikaw pa rin ang pipiliin ko araw-araw. Mahal na mahal kita, at hinding-hindi na'to mag babago.<i class="fas fa-quote-right" style="color: #ff9eb5; margin-left: 5px;"></i>
+</p>
+
+
+            <div style="margin-top: 20px;">
+                <p style="font-family: 'Dancing Script', cursive; font-size: 1.5rem; color: #ff4d4d;">
+                    Sayong sayo lang ako, KEI <i class="fas fa-heart" style="margin-left: 8px;"></i>
+                </p>
+            </div>
+        </footer>
+
+    <!-- Audio para sa background music -->
+    <audio id="bgMusic" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+       // === COUNTDOWN (Interactive Boxes) ===
+const targetDate = new Date("2025-09-17T11:19:00+08:00");
+
+const countdownOverlay = document.getElementById("countdownOverlay");
+const countdownBoxes = document.getElementById("countdownBoxes");
+
+function createBox(value, label, icon) {
+    const div = document.createElement("div");
+    div.className = "countdown-box";
+    div.innerHTML = `
+        <i class="${icon} countdown-icon"></i>
+        <div class="countdown-number">${value}</div>
+        <span>${label}</span>
+    `;
+    return div;
+}
+
+function updateCountdown() {
+    const now = new Date();
+    const diff = targetDate - now;
+
+    if (diff <= 0) {
+        // Kapag dumating na ang monthsary
+        countdownOverlay.style.transition = "opacity 1.5s ease";
+        countdownOverlay.style.opacity = "0";
+
+        setTimeout(() => {
+            countdownOverlay.style.display = "none";
+            for (let i = 0; i < 30; i++) setTimeout(createHearts, i * 80);
+            for (let i = 0; i < 25; i++) setTimeout(createPetals, i * 100);
+            createConfetti();
+            document.body.style.opacity = "0";
+            document.body.style.transition = "opacity 1.5s ease";
+            setTimeout(() => {
+                document.body.style.opacity = "1";
+            }, 50);
+            bgMusic.play().catch(() => {});
+        }, 1500);
+        clearInterval(countdownInterval);
+        return;
+    }
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
+
+    countdownBoxes.innerHTML = ""; // clear before update
+
+    const boxes = [
+        { value: days, label: "Days", icon: "fas fa-calendar-heart" },
+        { value: hours, label: "Hours", icon: "fas fa-clock" },
+        { value: minutes, label: "Minutes", icon: "fas fa-hourglass-half" },
+        { value: seconds, label: "Seconds", icon: "fas fa-heartbeat" }
+    ];
+
+    boxes.forEach(({ value, label, icon }) => {
+        const box = createBox(value, label, icon);
+        box.classList.add("animate");
+        setTimeout(() => box.classList.remove("animate"), 500);
+        countdownBoxes.appendChild(box);
+    });
+}
+
+const countdownInterval = setInterval(updateCountdown, 1000);
+updateCountdown();
+
+    function createHearts() {
+        const heartsContainer = document.getElementById('heartsContainer');
+        const heart = document.createElement('div');
+        heart.classList.add('heart-fall');
+        heart.innerHTML = '<i class="fas fa-heart"></i>';
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+        heartsContainer.appendChild(heart);
+        setTimeout(() => heart.remove(), 5000);
+    }
+
+    // Gumawa ng bumabagsak na petals
+    function createPetals() {
+        const petalsContainer = document.getElementById('petalsContainer');
+        const petal = document.createElement('div');
+        petal.classList.add('petal');
+        const flowerIcons = ['fas fa-seedling', 'fas fa-leaf', 'fas fa-spa'];
+        const randomIcon = flowerIcons[Math.floor(Math.random() * flowerIcons.length)];
+        petal.innerHTML = `<i class="${randomIcon}"></i>`;
+        petal.style.left = Math.random() * 100 + 'vw';
+        petal.style.animationDuration = Math.random() * 5 + 8 + 's';
+        petalsContainer.appendChild(petal);
+        setTimeout(() => petal.remove(), 15000);
+    }
+
+    // Create floating flowers animation
+    function createFloatingFlowers() {
+        const heartsContainer = document.getElementById('heartsContainer');
+        const flower = document.createElement('div');
+        flower.classList.add('heart-fall');
+        flower.style.fontSize = '25px';
+        flower.style.color = '#ff9eb5';
+        const flowerIcons = ['fas fa-seedling', 'fas fa-leaf', 'fas fa-cannabis', 'fas fa-spa'];
+        const randomIcon = flowerIcons[Math.floor(Math.random() * flowerIcons.length)];
+        flower.innerHTML = `<i class="${randomIcon}"></i>`;
+        flower.style.left = Math.random() * 100 + 'vw';
+        flower.style.animationDuration = Math.random() * 4 + 3 + 's';
+        heartsContainer.appendChild(flower);
+        setTimeout(() => flower.remove(), 7000);
+    }
+
+    // Flower explosion for countdown end
+    function createFlowerExplosion() {
+        const heartsContainer = document.getElementById('heartsContainer');
+        const flower = document.createElement('div');
+        flower.style.position = 'fixed';
+        flower.style.top = '50%';
+        flower.style.left = '50%';
+        flower.style.fontSize = '30px';
+        flower.style.color = '#ff4d4d';
+        flower.style.zIndex = '10000';
+        flower.style.pointerEvents = 'none';
+        
+        const flowerIcons = ['fas fa-heart', 'fas fa-seedling', 'fas fa-leaf', 'fas fa-spa', 'fas fa-cannabis'];
+        const randomIcon = flowerIcons[Math.floor(Math.random() * flowerIcons.length)];
+        flower.innerHTML = `<i class="${randomIcon}"></i>`;
+        
+        // Random direction explosion
+        const angle = Math.random() * Math.PI * 2;
+        const distance = Math.random() * 300 + 100;
+        const endX = Math.cos(angle) * distance;
+        const endY = Math.sin(angle) * distance;
+        
+        flower.style.animation = `explosion 2s ease-out forwards`;
+        flower.style.setProperty('--end-x', endX + 'px');
+        flower.style.setProperty('--end-y', endY + 'px');
+        
+        heartsContainer.appendChild(flower);
+        setTimeout(() => flower.remove(), 2000);
+    }
+
+    // Confetti para sa surprise
+    function createConfetti() {
+        const colors = ['#ff4d4d', '#ff9eb5', '#ff6b6b', '#ffb6c1', '#d46a6a'];
+        for (let i = 0; i < 50; i++) {
+            const confetti = document.createElement('div');
+            confetti.classList.add('confetti');
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.width = (Math.random() * 10 + 5) + 'px';
+            confetti.style.height = (Math.random() * 10 + 5) + 'px';
+            confetti.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            document.body.appendChild(confetti);
+            setTimeout(() => confetti.remove(), 6000);
+        }
+    }
+
+    const loveMessages = [
+        "Hindi ko alam kung anong ginawa ko sa buhay para maging akin ka.",
+        "Sa bawat gising ko, pangalan mo agad ang naiisip ko.",
+        "Nawawala ang pagod at stress ko sa tuwing kausap kita.",
+        "Ang saya saya ko tuwing naririnig ko yung boses at tawa mo.",
+        "Minsan iniisip ko, paano kung hindi kita nakilala? Buti na lang nakilala kita.",
+        "Gusto ko lang malaman mo na ikaw ang paborito kong tao sa buong mundo.",
+        "Sa dami ng tao sa mundo, sayo lang tumibok ang puso ko.",
+        "Kahit anong mangyari, ikaw at ikaw pa rin ang pipiliin ko.",
+        "Hindi ko na kailangan ng kahit ano pa, basta ikaw ang kasama ko.",
+        "Ikaw ang dahilan kung bakit lagi akong inspired sa araw-araw.",
+        "Kapag hinahawakan mo kamay ko, pakiramdam ko safe ako kahit saan.",
+        "Wala akong ibang gusto kundi mahalin ka araw-araw.",
+        "Hindi ko man nasasabi palagi, pero sobrang proud ako sayo.",
+        "Gusto ko lang ipaalam sayo, hindi ako magsasawang mahalin ka.",
+        "Sa lahat ng pangarap ko sa buhay, gusto ko palagi kang andoon.",
+        "Ikaw ang paborito kong goodnight message at good morning text.",
+        "Walang katapusan tong pagmamahalan natin.",
+        "Araw-araw kita namimiss.",
+        "Ikaw ang dahilan kung bakit ang ganda ng tingin ko sa buhay.",
+        "Walang araw na hindi kita naiisip.",
+        "Ikaw ang pinakamagandang bagay na dumating sa buhay ko.",
+        "Kung tatanungin ako kung anong gusto ko araw-araw, ang sagot ko ay ikaw.",
+        "Kahit anong mangyari, ikaw ang unang gusto kong makasama.",
+        "Ang ganda ng mundo kapag ikaw ang kausap ko.",
+    ];
+
+    let availableMessages = [...loveMessages];
+
+    document.getElementById('loveMessageBtn').addEventListener('click', function() {
+        const messageDiv = document.getElementById('randomMessage');
+        const btn = document.getElementById('loveMessageBtn');
+        
+        // Button animation
+        btn.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+            btn.style.transform = 'scale(1)';
+        }, 150);
+        
+        // Reset messages kapag naubos na lahat
+        if (availableMessages.length === 0) {
+            availableMessages = [...loveMessages];
+        }
+
+        // Piliin random message na hindi pa lumalabas
+        const randomIndex = Math.floor(Math.random() * availableMessages.length);
+        const selectedMessage = availableMessages[randomIndex];
+
+        // Tanggalin yung napili para hindi maulit
+        availableMessages.splice(randomIndex, 1);
+
+        // Display message
+        messageDiv.innerHTML = `<i class="fas fa-heart" style="color: #ff4d4d; margin-right: 8px;"></i>${selectedMessage}`;
+        messageDiv.style.display = 'block';
+        messageDiv.style.opacity = '0';
+        
+        setTimeout(() => {
+            messageDiv.style.opacity = '1';
+        }, 100);
+        
+        // Create hearts animation
+        for (let i = 0; i < 10; i++) {
+            setTimeout(createHearts, i * 100);
+        }
+    });
+
+    setInterval(createHearts, 300);
+    setInterval(createPetals, 500);
+    setInterval(createFloatingFlowers, 800);
+
+    function sendKiss() {
+        const kissMessage = document.getElementById('kiss-message');
+        kissMessage.style.display = 'block';
+        kissMessage.style.opacity = '1';
+        for (let i = 0; i < 20; i++) setTimeout(createHearts, i * 100);
+        for (let i = 0; i < 15; i++) setTimeout(createPetals, i * 100);
+        for (let i = 0; i < 10; i++) setTimeout(createFloatingFlowers, i * 150);
+        setTimeout(() => {
+            kissMessage.style.opacity = '0';
+            setTimeout(() => kissMessage.style.display = 'none', 500);
+        }, 4000);
+    }
+
+    // 30 reasons ❤️
+    const reasons = [
+  { icon: "fas fa-smile", text: "Dahil napapangiti mo ako kahit wala kang ginagawa." },
+  { icon: "fas fa-bed", text: "Dahil ako palagi ang una mong iniisip pagkagising at huling iniisip bago matulog." },
+  { icon: "fas fa-hand-holding-heart", text: "Dahil palagi mong pinaparamdam na importante ako." },
+  { icon: "fas fa-heart", text: "Dahil palagi mong pinaparamdam na mahal na mahal mo ako." },
+  { icon: "fas fa-briefcase", text: "Dahil kahit pagod ka sa work mo, kinakausap mo pa rin ako." },
+  { icon: "fas fa-utensils", text: "Dahil palagi mo akong inaalala kung kumain na ba ako." },
+  { icon: "fas fa-music", text: "Dahil ang ganda ng music taste mo, same na same tayo HAHHA." },
+  { icon: "fas fa-sun", text: "Dahil ikaw ang nagpapaliwanag ng araw ko." },
+  { icon: "fas fa-handshake", text: "Dahil hindi mo ako iniiwan kahit malayo tayo sa isa't isa." },
+  { icon: "fas fa-star", text: "Dahil proud ka palagi sakin kahit sa maliliit kong achievements." },
+  { icon: "fas fa-comments", text: "Dahil lagi kang willing makipag-usap kapag may tampuhan." },
+  { icon: "fas fa-cloud-sun", text: "Dahil kahit magulo ang mundo ko, napapagaan mo ito." },
+  { icon: "fas fa-hourglass-half", text: "Dahil kapag malungkot ako, binibigyan mo ako ng oras para magpahinga at makapag-isip." },
+  { icon: "fas fa-laugh-beam", text: "Dahil ikaw ang dahilan kung bakit masaya ako palagi." },
+  { icon: "fas fa-gift", text: "Dahil hindi ka napapagod mag effort para sa atin." },
+  { icon: "fas fa-phone", text: "Dahil kahit nasa malayo tayo, palagi kang available sa akin." },
+  { icon: "fas fa-life-ring", text: "Dahil palagi kang nandiyan kapag may problema ako." },
+  { icon: "fas fa-clock", text: "Dahil binibigyan mo pa rin ako ng oras kahit busy ka." },
+  { icon: "fas fa-fire", text: "Dahil hindi mo hinahayaan na mawala ang spark sa relasyon natin." },
+  { icon: "fas fa-check-circle", text: "Dahil pinaparamdam mo sa akin na sapat ako." },
+  { icon: "fas fa-gem", text: "Dahil pinaparamdam mo na espesyal at iba ako sa lahat." },
+  { icon: "fas fa-clover", text: "Dahil ikaw ang pinakamagandang nangyari sa buhay ko." },
+  { icon: "fas fa-paper-plane", text: "Dahil kahit simpleng chat lang, napapasaya mo ako." },
+  { icon: "fas fa-drumstick-bite", text: "Dahil ako lang ang laman ng puso, atay, at balun-balunan mo HAHAHA." },
+  { icon: "fas fa-heart-circle-bolt", text: "Dahil palagi mong sinasabi sa akin kung gaano mo ako kamahal." },
+  { icon: "fas fa-person-booth", text: "Dahil palagi mong pinaparamdam kung gaano ako ka-importante sa buhay mo." },
+  { icon: "fas fa-eye", text: "Dahil ako rin ang nakikita mo sa future mo." },
+  { icon: "fas fa-ring", text: "Dahil gusto mo ako kasama habang buhay." },
+  { icon: "fas fa-face-grin-hearts", text: "Dahil palagi mo akong pinapasaya." },
+  { icon: "fas fa-heart", text: "Dahil ang ganda-ganda mo at hindi ko mapigilang mahalin ka lagi." }
+];
+
+
+    const reasonDisplayBtn = document.getElementById('reasonDisplayBtn');
+    const singleReason = document.getElementById('singleReason');
+    const surpriseBtn = document.getElementById('surpriseBtn');
+    const surpriseContent = document.getElementById('surpriseContent');
+
+    let currentReasonIndex = 0;
+
+    function showNextReason() {
+        singleReason.style.opacity = '0';
+        setTimeout(() => {
+            if (currentReasonIndex < reasons.length) {
+                singleReason.style.display = 'block';
+                singleReason.innerHTML = `
+                    <div class="reason-number">Reason #${currentReasonIndex + 1}</div>
+                    <div class="reason-icon"><i class="${reasons[currentReasonIndex].icon}"></i></div>
+                    <div class="reason-text">${reasons[currentReasonIndex].text}</div>
+                `;
+                currentReasonIndex++;
+                for (let i = 0; i < 5; i++) setTimeout(createHearts, i * 100);
+                if (currentReasonIndex === reasons.length) {
+                    reasonDisplayBtn.innerHTML = '<i class="fas fa-heart"></i> View Again';
+                }
+            } else {
+                currentReasonIndex = 0;
+                showNextReason();
+                reasonDisplayBtn.innerHTML = '<i class="fas fa-heart"></i>  View Again';
+            }
+            singleReason.style.opacity = '1';
+        }, 200);
+    }
+
+    reasonDisplayBtn.addEventListener('click', showNextReason);
+
+    if (surpriseBtn) {
+        surpriseBtn.addEventListener('click', function() {
+            surpriseContent.style.display = 'block';
+            surpriseContent.style.opacity = '0';
+            setTimeout(() => {
+                surpriseContent.style.opacity = '1';
+                createConfetti();
+                surpriseContent.classList.add('rumble');
+                setTimeout(() => surpriseContent.classList.remove('rumble'), 1000);
+            }, 200);
+        });
+    }
+
+    // Music control
+    const musicControl = document.getElementById('musicControl');
+    const bgMusic = document.getElementById('bgMusic');
+    let isPlaying = false;
+
+    musicControl.addEventListener('click', function () {
+        if (isPlaying) {
+            bgMusic.pause();
+            musicControl.innerHTML = '<i class="fas fa-music"></i>';
+        } else {
+            bgMusic.play();
+            musicControl.innerHTML = '<i class="fas fa-pause"></i>';
+        }
+        isPlaying = !isPlaying;
+    });
+
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            bgMusic.play().then(() => {
+                isPlaying = true;
+                musicControl.innerHTML = '<i class="fas fa-pause"></i>';
+            }).catch(() => {});
+        }, 1000);
+    });
+</script>
+
+</body>
+</html>
