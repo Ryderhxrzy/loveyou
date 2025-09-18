@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+/* Gumawa ng falling animation para sa special icon */
+@keyframes fallDown {
+  0% {
+    transform: translateY(-10vh);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+}
+
+.heart-falls {
+  animation: fallDown 7s linear forwards;
+}
+</style>
+
+<script>
+const lyrics = [
+  "Sa bawat tibok ng puso ko, pangalan mo ang laman.",
+  "Ikaw ang gusto kong makasama sa lahat ng oras.",
+  "Ang mundo ko ay mas makulay dahil sayo.",
+  "Kahit ilang ulit, ikaw at ikaw pa rin ang pipiliin ko.",
+  "Walang araw na hindi kita naiisip, mahal.",
+  "Mas masarap ang bawat umaga kapag ikaw ang dahilan.",
+  "Ikaw ang aking safe place sa mundong magulo.",
+  "Ikaw ang kanta na paulit-ulit kong pinapakinggan.",
+  "Bawat yakap mo, parang gumagaan ang lahat.",
+  "Ikaw ang pangarap na ayaw ko nang gisingan."
+];
+
+function createSpecialFallingIcon() {
+  const heartsContainer = document.getElementById('heartsContainer');
+  const iconWrapper = document.createElement('div');
+  iconWrapper.classList.add('heart-falls');
+  iconWrapper.style.position = 'absolute';
+  iconWrapper.style.top = '0';
+  iconWrapper.style.left = Math.random() * 90 + 'vw';
+  iconWrapper.style.display = 'flex';
+  iconWrapper.style.flexDirection = 'column';
+  iconWrapper.style.alignItems = 'center';
+  iconWrapper.style.gap = '5px';
+  iconWrapper.style.cursor = 'pointer';
+  iconWrapper.style.zIndex = '999';
+
+  const icon = document.createElement('i');
+  icon.className = "fas fa-heart-circle-plus";
+  icon.style.fontSize = "2rem";
+  icon.style.color = "#ff6b6b";
+
+  iconWrapper.appendChild(icon);
+
+  // CLICK EVENT para lumabas ang lyric bubble
+  iconWrapper.addEventListener('click', () => {
+    const lyricBubble = document.createElement('div');
+    lyricBubble.classList.add('message-bubble', 'show');
+    lyricBubble.innerText = lyrics[Math.floor(Math.random() * lyrics.length)];
+    lyricBubble.style.position = "absolute";
+    lyricBubble.style.bottom = "110%";
+    lyricBubble.style.left = "50%";
+    lyricBubble.style.transform = "translateX(-50%)";
+    iconWrapper.appendChild(lyricBubble);
+
+    setTimeout(() => lyricBubble.remove(), 3000);
+  });
+
+  heartsContainer.appendChild(iconWrapper);
+
+  // auto-remove para hindi masyadong dumami
+  setTimeout(() => iconWrapper.remove(), 7000);
+}
+
+// Debug mode: gumagawa agad ng isa para makita mo
+createSpecialFallingIcon();
+
+// Loop every 1 second with 20% chance
+setInterval(() => {
+  if (Math.random() < 0.2) createSpecialFallingIcon();
+}, 1000);
+</script>
+
+</body>
+</html>

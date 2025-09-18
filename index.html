@@ -8,6 +8,109 @@
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+
+    <style>
+       /* Container ng lahat ng falling icons */
+#clickMeContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 9999;
+}
+
+/* Wrapper ng icon (heart + label) */
+.click-me-icon {
+    position: absolute;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    pointer-events: auto;
+    animation: falls 10s linear forwards;
+}
+
+/* Icon mismo */
+.click-me-heart {
+    font-size: 2rem;
+    color: #ff4d4d;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+.click-me-heart:hover {
+    transform: scale(1.1);
+}
+
+/* Label na "Click Me" */
+.click-me-label {
+    font-size: 0.8rem;
+    color: rgba(255, 77, 77, 0.9);
+    margin-top: 4px;
+    font-weight: bold;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+/* Message bubble (lyrics) */
+.message-bubble {
+    position: absolute;
+    background: rgba(255, 77, 77, 0.9);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 18px;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    z-index: 10000;
+
+    /* ✅ Responsive Fixes (no fade) */
+    max-width: 260px;
+    min-width: 100px;
+    word-wrap: break-word;
+    white-space: normal;
+    text-align: center;
+    overflow-wrap: break-word;
+
+    /* ❌ Removed opacity/transition/transform for instant show */
+}
+
+/* maliit na triangle pointer */
+.message-bubble:after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 10px 10px 0;
+    border-style: solid;
+    border-color: rgba(255, 77, 77, 0.9) transparent transparent;
+}
+
+/* Animation para sa pagbagsak ng icon */
+@keyframes falls {
+    0% { transform: translateY(-10vh); opacity: 1; }
+    100% { transform: translateY(110vh); opacity: 0; }
+}
+
+
+/* ✅ Responsive tweaks for mobile view */
+@media (max-width: 480px) {
+    .click-me-heart {
+        font-size: 1.6rem;
+    }
+    .click-me-label {
+        font-size: 0.7rem;
+    }
+    .message-bubble {
+        font-size: 0.8rem;
+        padding: 6px 10px;
+        max-width: 85vw;
+    }
+}
+
+
+    </style>
 </head>
 <body>
     <div id="countdownOverlay" style="
@@ -22,13 +125,27 @@
     overflow: hidden;">
     
     <!-- Floating romantic decorations -->
-    <div style="position: absolute; top: 10%; left: 10%; font-size: 3rem; color: rgba(255, 77, 77, 0.3); animation: float 6s ease-in-out infinite;"><i class="fas fa-heart"></i></div>
-    <div style="position: absolute; top: 15%; right: 15%; font-size: 2.5rem; color: rgba(255, 158, 181, 0.4); animation: float 8s ease-in-out infinite reverse;"><i class="fas fa-rose"></i></div>
-    <div style="position: absolute; bottom: 20%; left: 12%; font-size: 2.8rem; color: rgba(255, 107, 107, 0.35); animation: float 7s ease-in-out infinite;"><i class="fas fa-star"></i></div>
-    <div style="position: absolute; bottom: 25%; right: 10%; font-size: 3.2rem; color: rgba(255, 182, 193, 0.3); animation: float 9s ease-in-out infinite reverse;"><i class="fas fa-candy-cane"></i></div>
-    <div style="position: absolute; top: 40%; left: 5%; font-size: 2.3rem; color: rgba(255, 77, 77, 0.25); animation: float 10s ease-in-out infinite;"><i class="fas fa-kiss-wink-heart"></i></div>
+    
     <div style="position: absolute; top: 50%; right: 8%; font-size: 2.6rem; color: rgba(255, 158, 181, 0.3); animation: float 11s ease-in-out infinite reverse;"><i class="fas fa-gift-heart"></i></div>
     
+    <div class="hearts-container" id="heartsContainer"></div>
+    <div class="petals-container" id="petalsContainer"></div>
+
+    <div id="clickMeContainer"></div>
+
+     <div class="flower-small" style="top: 25%; left: 12%;"><i class="fas fa-spa"></i></div>
+    <div class="flower-small" style="top: 30%; right: 15%;"><i class="fas fa-spa"></i></div>
+    <div class="flower-small" style="bottom: 30%; left: 15%;"><i class="fas fa-spa"></i></div>
+    <div class="flower-small" style="bottom: 25%; right: 12%;"><i class="fas fa-spa"></i></div>
+
+    <!-- Decorative flowers with icons -->
+    <div class="flower flower-1"><i class="fas fa-seedling"></i></div>
+    <div class="flower flower-2"><i class="fas fa-leaf"></i></div>
+    <div class="flower flower-3"><i class="fas fa-cannabis"></i></div>
+    <div class="flower flower-4"><i class="fas fa-seedling"></i></div>
+    <div class="flower flower-5"><i class="fas fa-leaf"></i></div>
+    <div class="flower flower-6"><i class="fas fa-cannabis"></i></div>   
+
     <div style="position: relative; z-index: 2;">
         <h1 style="
             font-family: 'Dancing Script', cursive; 
@@ -36,7 +153,7 @@
             color: #ff4d4d; 
             margin-bottom: 15px; 
             text-shadow: 2px 2px 8px rgba(255, 77, 77, 0.3);
-            animation: pulse 2s ease-in-out infinite;">
+            animation: gentleFade 3s ease-in-out infinite;">
             <i class="fas fa-heart" style="margin-right: 15px; color: #ff9eb5;"></i>
             Countdown to Our First Monthsary
             <i class="fas fa-heart" style="margin-left: 15px; color: #ff9eb5;"></i>
@@ -68,9 +185,9 @@
     </div>
     
     <style>
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+        @keyframes gentleFade {
+            0%, 100% { opacity: 0.9; }
+            50% { opacity: 1; }
         }
         
         @keyframes fadeInOut {
@@ -88,6 +205,8 @@
 
     <div class="hearts-container" id="heartsContainer"></div>
     <div class="petals-container" id="petalsContainer"></div>
+
+    
 
     <!-- Decorative flowers with icons -->
     <div class="flower flower-1"><i class="fas fa-seedling"></i></div>
@@ -136,7 +255,7 @@
             <p style="font-size: 1.2rem; line-height: 1.8; color: #666; max-width: 800px; margin: 0 auto;">
                 <i class="fas fa-quote-left" style="color: #ff9eb5; margin-right: 8px;"></i>
                 Sa loob ng isang buwan ng ating pagmamahalan, mahal, napakarami kong natutunan — isa na rito ang tunay na kahulugan ng pag-ibig. 
-                Ang pag-ibig pala ay hindi lang tungkol sa mga sweet messages HAHAHA, kundi tungkol din sa mga maliliit na bagay na ginagawa natin para sa isa’t isa araw-araw. 
+                Ang pag-ibig pala ay hindi lang tungkol sa mga sweet messages HAHAHA, kundi tungkol din sa mga maliliit na bagay na ginagawa natin para sa isa't isa araw-araw. 
                 Yung bawat message mo, bawat tawag, at bawat oras na sinasamahan mo ako kahit sa simpleng panonood lang habang nagwo-work ako, sobrang na-aappreciate ko. 
                 Ramdam na ramdam ko kung gaano ako ka-importante sayo at kung gaano mo ako kamahal. 
                 Maraming salamat sayo, mahal, lalo na sa iyong kabaitan at sa walang sawang pagpaparamdam sa akin kung gaano ako kahalaga at gaano mo ako kamahal.
@@ -166,7 +285,7 @@
             text-align: center;
             backdrop-filter: blur(10px);">
 
-             <h2 class="reason-title">30 Reasons Why I Love Ysou</h2>
+             <h2 class="reason-title">30 Reasons Why I Love You</h2>
             <p>30 muna ngayon, pero sa bawat araw na lumilipas, mas dumarami pa ang dahilan kung bakit kita mahal HAHAHA :></p>
 
             <button class="reason-display-btn" id="reasonDisplayBtn">
@@ -396,8 +515,123 @@
     </audio>
 
     <script>
+        const lyrics = [
+            "Sa bawat tibok ng puso ko, pangalan mo ang laman.",
+            "Ikaw ang gusto kong makasama sa lahat ng oras.",
+            "Ang mundo ko ay mas makulay dahil sayo.",
+            "Kahit ilang ulit, ikaw at ikaw pa rin ang pipiliin ko.",
+            "Walang araw na hindi kita naiisip, mahal.",
+            "Mas masarap ang bawat umaga kapag ikaw ang dahilan.",
+            "Ikaw ang aking safe place sa mundong magulo.",
+            "Ikaw ang kanta na paulit-ulit kong pinapakinggan.",
+            "Bawat yakap mo, parang gumagaan ang lahat.",
+            "Ikaw ang pangarap na ayaw ko nang gisingan."
+        ];
+
+        // Function to show click indicator
+        function showClickIndicator(x, y) {
+            const indicator = document.createElement('div');
+            indicator.className = 'click-indicator';
+            indicator.style.left = (x - 10) + 'px';
+            indicator.style.top = (y - 10) + 'px';
+            document.body.appendChild(indicator);
+            
+            setTimeout(() => {
+                document.body.removeChild(indicator);
+            }, 500);
+        }
+
+        // Modified createSpecialFallingIcon function
+        function createSpecialFallingIcon() {
+            const clickMeContainer = document.getElementById('clickMeContainer');
+            if (!clickMeContainer) {
+                console.error("Click Me container not found!");
+                return;
+            }
+            
+            const iconWrapper = document.createElement('div');
+            iconWrapper.className = 'click-me-icon';
+            
+            // Random horizontal position (5vw to 95vw)
+            const randomLeft = 12 + Math.random() * 76;
+            iconWrapper.style.left = randomLeft + 'vw';
+
+            // Label na "Click Me"
+            const label = document.createElement('span');
+            label.className = 'click-me-label';
+            label.innerText = "Click Me";
+
+            // Icon mismo
+            const icon = document.createElement('i');
+            icon.className = "fas fa-heart-circle-plus click-me-heart";
+
+            iconWrapper.appendChild(icon);
+            iconWrapper.appendChild(label);
+
+            // Kapag pinindot - maglalabas ng lyric bubble
+            iconWrapper.addEventListener('click', function handleClick(event) {
+                event.stopPropagation();
+                
+                // Remove the click event listener after first click
+                iconWrapper.removeEventListener('click', handleClick);
+                
+                // Disable further clicks
+                iconWrapper.style.pointerEvents = 'none';
+                
+                // Check if there's already a message bubble
+                const existingBubble = iconWrapper.querySelector('.message-bubble');
+                if (existingBubble) {
+                    existingBubble.remove();
+                }
+                
+                const lyricBubble = document.createElement('div');
+                lyricBubble.className = 'message-bubble';
+                const randomLyric = lyrics[Math.floor(Math.random() * lyrics.length)];
+                lyricBubble.innerText = randomLyric;
+                
+                // Position the bubble above the icon
+                lyricBubble.style.bottom = 'calc(100% + 10px)';
+                lyricBubble.style.left = '50%';
+                iconWrapper.appendChild(lyricBubble);
+                
+               requestAnimationFrame(() => {
+                    lyricBubble.style.opacity = '1';
+                    lyricBubble.style.transform = 'translate(-50%, 0)';
+                });
+
+                setTimeout(() => {
+                    if (lyricBubble.parentNode) {
+                        lyricBubble.parentNode.removeChild(lyricBubble);
+                    }
+                }, 3000);
+            });
+
+            clickMeContainer.appendChild(iconWrapper);
+
+            // auto-remove kapag tapos na bumagsak
+            setTimeout(() => {
+                if (iconWrapper.parentNode) {
+                    iconWrapper.parentNode.removeChild(iconWrapper);
+                }
+            }, 8000);
+        }
+
+        window.addEventListener('load', () => {
+            // Start creating icons after a delay
+            setTimeout(() => {
+                // Create first icon immediately
+                createSpecialFallingIcon();
+                
+                // Then set up the interval
+                setInterval(() => {
+                    if (Math.random() < 0.2) {
+                        createSpecialFallingIcon();
+                    }
+                }, 1000);
+            }, 1000);
+        });
        // === COUNTDOWN (Interactive Boxes) ===
-const targetDate = new Date("2025-09-17T11:19:00+08:00");
+const targetDate = new Date("2025-09-22T00:00:00+08:00");
 
 const countdownOverlay = document.getElementById("countdownOverlay");
 const countdownBoxes = document.getElementById("countdownBoxes");
@@ -446,16 +680,14 @@ function updateCountdown() {
     countdownBoxes.innerHTML = ""; // clear before update
 
     const boxes = [
-        { value: days, label: "Days", icon: "fas fa-calendar-heart" },
+        { value: days, label: "Days", icon: "fas fa-calendar" },
         { value: hours, label: "Hours", icon: "fas fa-clock" },
         { value: minutes, label: "Minutes", icon: "fas fa-hourglass-half" },
-        { value: seconds, label: "Seconds", icon: "fas fa-heartbeat" }
+        { value: seconds, label: "Seconds", icon: "fas fa-stopwatch" }
     ];
 
     boxes.forEach(({ value, label, icon }) => {
         const box = createBox(value, label, icon);
-        box.classList.add("animate");
-        setTimeout(() => box.classList.remove("animate"), 500);
         countdownBoxes.appendChild(box);
     });
 }
@@ -618,7 +850,7 @@ updateCountdown();
 
     setInterval(createHearts, 300);
     setInterval(createPetals, 500);
-    setInterval(createFloatingFlowers, 800);
+    setInterval(createFloatingFlowers, 1000);
 
     function sendKiss() {
         const kissMessage = document.getElementById('kiss-message');
@@ -666,7 +898,6 @@ updateCountdown();
   { icon: "fas fa-face-grin-hearts", text: "Dahil palagi mo akong pinapasaya." },
   { icon: "fas fa-heart", text: "Dahil ang ganda-ganda mo at hindi ko mapigilang mahalin ka lagi." }
 ];
-
 
     const reasonDisplayBtn = document.getElementById('reasonDisplayBtn');
     const singleReason = document.getElementById('singleReason');
