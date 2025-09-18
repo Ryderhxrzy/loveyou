@@ -71,8 +71,6 @@
     white-space: normal;
     text-align: center;
     overflow-wrap: break-word;
-
-    /* ❌ Removed opacity/transition/transform for instant show */
 }
 
 /* maliit na triangle pointer */
@@ -112,7 +110,7 @@
 
     </style>
 </head>
-<body>
+<body>    
     <div id="countdownOverlay" style="
     position: fixed; top: 0; left: 0;
     width: 100%; height: 100%;
@@ -123,13 +121,10 @@
     z-index: 9999;
     font-family: 'Montserrat', sans-serif;
     overflow: hidden;">
-    
-    <!-- Floating romantic decorations -->
-    
-    <div style="position: absolute; top: 50%; right: 8%; font-size: 2.6rem; color: rgba(255, 158, 181, 0.3); animation: float 11s ease-in-out infinite reverse;"><i class="fas fa-gift-heart"></i></div>
-    
-    <div class="hearts-container" id="heartsContainer"></div>
-    <div class="petals-container" id="petalsContainer"></div>
+    <div class="hearts-container1" id="heartsContainer1"></div>
+    <div class="petals-container1" id="petalsContainer1"></div>
+    <div class="stars-container" id="starsContainer"></div>
+    <div class="sparkles-container" id="sparkesContainer"></div>
 
     <div id="clickMeContainer"></div>
 
@@ -166,7 +161,7 @@
             font-weight: 500;
             text-shadow: 1px 1px 3px rgba(212, 106, 106, 0.3);">
             <i class="fas fa-sparkles" style="margin-right: 8px;"></i>
-            Mga sandali nalang at makakasama na kita sa espesyal na araw na ito
+            Habang nag hihintay ka, pindutin mo yung special button (˶˃ ᵕ ˂˶)
             <i class="fas fa-sparkles" style="margin-left: 8px;"></i>
         </p>
 
@@ -179,7 +174,7 @@
             font-style: italic;
             animation: fadeInOut 3s ease-in-out infinite;">
             <i class="fas fa-clock" style="margin-right: 8px;"></i>
-            Hintay ka lang, love... may surpresa ako
+            Wait ka lang mahal, malapit mo na makita ang ginawa ko para sayo hehe (« • ֊ • »)
             <i class="fas fa-gift" style="margin-left: 8px; color: #ff9eb5;"></i>
         </p>
     </div>
@@ -205,8 +200,6 @@
 
     <div class="hearts-container" id="heartsContainer"></div>
     <div class="petals-container" id="petalsContainer"></div>
-
-    
 
     <!-- Decorative flowers with icons -->
     <div class="flower flower-1"><i class="fas fa-seedling"></i></div>
@@ -515,122 +508,164 @@
     </audio>
 
     <script>
-        const lyrics = [
-            "Sa bawat tibok ng puso ko, pangalan mo ang laman.",
-            "Ikaw ang gusto kong makasama sa lahat ng oras.",
-            "Ang mundo ko ay mas makulay dahil sayo.",
-            "Kahit ilang ulit, ikaw at ikaw pa rin ang pipiliin ko.",
-            "Walang araw na hindi kita naiisip, mahal.",
-            "Mas masarap ang bawat umaga kapag ikaw ang dahilan.",
-            "Ikaw ang aking safe place sa mundong magulo.",
-            "Ikaw ang kanta na paulit-ulit kong pinapakinggan.",
-            "Bawat yakap mo, parang gumagaan ang lahat.",
-            "Ikaw ang pangarap na ayaw ko nang gisingan."
-        ];
+       const lyrics = [
+    '<i class="fas fa-heart"></i> Sa dami ng tao sa mundo, buti na lang ikaw ang nahanap ko.',
+    '<i class="fas fa-envelope"></i> Alam mo ba? ikaw ang pinakamagandang nangyari sa buhay ko.',
+    '<i class="fas fa-globe"></i> Kahit malayo tayo, ramdam na ramdam ko yung pagmamahal mo.',
+    '<i class="fas fa-smile"></i> Ikaw ang dahilan kung bakit ako masaya araw-araw.',
+    '<i class="fas fa-headphones"></i> Nawawala pagod ko kapag naririnig ko boses mo.',
+    '<i class="fas fa-hand-holding-heart"></i> Promise, hinding hindi kita iiwan kahit anong mangyari.',
+    '<i class="fas fa-praying-hands"></i> Salamat sa walang sawang pag-intindi at pagmamahal sa akin.',
+    '<i class="fas fa-bolt"></i> Ikaw ang aking inspirasyon at lakas sa bawat araw.',
+    '<i class="fas fa-sparkles"></i> Hindi ko inexpect na magiging ganito kasaya ang buhay ko dahil sayo.',
+    '<i class="fas fa-plane"></i> Mahal na mahal kita, mas mahal pa sa ticket ng eroplano.',
+    '<i class="fas fa-seedling"></i> Maraming iba jan pero hindi sila ikaw.',
+    '<i class="fas fa-heartbeat"></i> Gusto ko lang sabihin na mahal na mahal kita.',
+    '<i class="fas fa-sun"></i> Ikaw ang aking araw sa bawat umaga at <i class="fas fa-star"></i> bituin sa bawat gabi.',
+    '<i class="fas fa-crown"></i> Walang hihigit sayo.',
+    '<i class="fas fa-home"></i> Ikaw ang aking tahanan at mundo.',
+    '<i class="fas fa-calendar-day"></i> Sa bawat araw na lumilipas, mas lalo kitang minamahal.',
+    '<i class="fas fa-hands"></i> Kahit anong mangyari, andito lang ako para sayo.',
+    '<i class="fas fa-heart"></i> Sobrang proud na proud ako sayo mahal ko.',
+    '<i class="fas fa-star"></i> Ang galing galing mo palagi.',
+    '<i class="fas fa-bed"></i> Ikaw ang aking pahinga mahal ko.',
+    '<i class="fas fa-bullseye"></i> Ikaw ang aking inspirasyon sa lahat ng aking ginagawa.',
+    '<i class="fas fa-ring"></i> Papakasalan na kita soon.',
+    '<i class="fas fa-infinity"></i> Ikaw ang aking forever.',
+    '<i class="fas fa-lock"></i> Walang papalit sayo.',
+    '<i class="fas fa-question"></i> Ikaw ang pinakamagandang "What If" na nangyari sa buhay ko.',
+    '<i class="fas fa-rainbow"></i> Sana masaya ka ngayong araw.',
+    '<i class="fas fa-trophy"></i> Gusto ko lang sabihin sayo na ang galing galing mo palagi.',
+    '<i class="fas fa-heart"></i> Ang ganda ganda mo.',
+    '<i class="fas fa-heart"></i> Ang cute cute mo mahal ko.',
+    '<i class="fas fa-sad-tear"></i> Miss na miss na kita sobra T_T.',
+    '<i class="fas fa-smile-beam"></i> Mahal, Smile ka lagi ha.',
+    '<i class="fas fa-heart"></i> Gusto ko lang sabihin na sobrang proud ako sayo.',
+    '<i class="fas fa-redo"></i> Hindi ako magsasawang mahalin ka araw-araw.',
+    '<i class="fas fa-spa"></i> Mas gumanda ang mundo ko simula nung dumating ka.'
+];
 
-        // Function to show click indicator
-        function showClickIndicator(x, y) {
-            const indicator = document.createElement('div');
-            indicator.className = 'click-indicator';
-            indicator.style.left = (x - 10) + 'px';
-            indicator.style.top = (y - 10) + 'px';
-            document.body.appendChild(indicator);
-            
-            setTimeout(() => {
-                document.body.removeChild(indicator);
-            }, 500);
-        }
+let unusedLyrics = [...lyrics]; // copy of lyrics para hindi maulit
 
-        // Modified createSpecialFallingIcon function
-        function createSpecialFallingIcon() {
-            const clickMeContainer = document.getElementById('clickMeContainer');
-            if (!clickMeContainer) {
-                console.error("Click Me container not found!");
+// Function to get unique random lyric
+function getRandomLyric() {
+    if (unusedLyrics.length === 0) {
+        // Reset kapag naubos na lahat
+        unusedLyrics = [...lyrics];
+    }
+    const index = Math.floor(Math.random() * unusedLyrics.length);
+    return unusedLyrics.splice(index, 1)[0]; // remove para hindi maulit
+}
+
+// Active icons tracking to prevent overlapping
+let activeIcons = [];
+const MIN_DISTANCE = 150; // minimum distance between icons in pixels
+
+function isPositionTooClose(newLeft, existingIcons) {
+    const newLeftPx = (newLeft / 100) * window.innerWidth;
+    return existingIcons.some(iconData => {
+        const existingLeftPx = (iconData.left / 100) * window.innerWidth;
+        return Math.abs(newLeftPx - existingLeftPx) < MIN_DISTANCE;
+    });
+}
+
+function createSpecialFallingIcon() {
+    const clickMeContainer = document.getElementById('clickMeContainer');
+    if (!clickMeContainer) {
+        console.error("Click Me container not found!");
+        return;
+    }
+
+    const iconWrapper = document.createElement('div');
+    iconWrapper.className = 'click-me-icon';
+
+    let randomLeft;
+    let attempts = 0;
+    const maxAttempts = 10;
+    const isMobile = window.innerWidth <= 480;
+    const minLeft = isMobile ? 8 : 10;
+    const maxLeft = isMobile ? 82 : 85;
+
+    do {
+        randomLeft = minLeft + Math.random() * (maxLeft - minLeft);
+        attempts++;
+    } while (isPositionTooClose(randomLeft, activeIcons) && attempts < maxAttempts);
+
+    iconWrapper.style.left = randomLeft + '%';
+
+    const iconData = { element: iconWrapper, left: randomLeft, hasMessage: false };
+    activeIcons.push(iconData);
+
+    const label = document.createElement('span');
+    label.className = 'click-me-label';
+    label.innerText = "Click Me";
+
+    const icon = document.createElement('i');
+    icon.className = "fas fa-heart-circle-plus click-me-heart";
+
+    iconWrapper.appendChild(icon);
+    iconWrapper.appendChild(label);
+
+    iconWrapper.addEventListener('click', function handleClick(event) {
+        event.stopPropagation();
+        iconData.hasMessage = true;
+        iconWrapper.removeEventListener('click', handleClick);
+        iconWrapper.style.pointerEvents = 'none';
+
+        const existingBubble = iconWrapper.querySelector('.message-bubble');
+        if (existingBubble) existingBubble.remove();
+
+        const lyricBubble = document.createElement('div');
+        lyricBubble.className = 'message-bubble';
+        lyricBubble.innerHTML = getRandomLyric(); // ✅ USE innerHTML para gumana ang <i> icon
+
+        lyricBubble.style.bottom = 'calc(100% + 15px)';
+        lyricBubble.style.left = '50%';
+        lyricBubble.style.transform = 'translateX(-50%)';
+
+        iconWrapper.appendChild(lyricBubble);
+
+        requestAnimationFrame(() => lyricBubble.style.opacity = '1');
+
+        const checkPosition = () => {
+            const rect = iconWrapper.getBoundingClientRect();
+            if (rect.top > window.innerHeight + 50) {
+                if (lyricBubble.parentNode) lyricBubble.remove();
                 return;
             }
-            
-            const iconWrapper = document.createElement('div');
-            iconWrapper.className = 'click-me-icon';
-            
-            // Random horizontal position (5vw to 95vw)
-            const randomLeft = 12 + Math.random() * 76;
-            iconWrapper.style.left = randomLeft + 'vw';
+            if (iconWrapper.parentNode) requestAnimationFrame(checkPosition);
+        };
+        requestAnimationFrame(checkPosition);
 
-            // Label na "Click Me"
-            const label = document.createElement('span');
-            label.className = 'click-me-label';
-            label.innerText = "Click Me";
+        setTimeout(() => {
+            if (lyricBubble.parentNode) lyricBubble.remove();
+        }, 6000);
+    });
 
-            // Icon mismo
-            const icon = document.createElement('i');
-            icon.className = "fas fa-heart-circle-plus click-me-heart";
+    clickMeContainer.appendChild(iconWrapper);
 
-            iconWrapper.appendChild(icon);
-            iconWrapper.appendChild(label);
+    setTimeout(() => {
+        if (iconWrapper.parentNode) iconWrapper.parentNode.removeChild(iconWrapper);
+        const index = activeIcons.findIndex(item => item.element === iconWrapper);
+        if (index > -1) activeIcons.splice(index, 1);
+    }, 10000);
+}
 
-            // Kapag pinindot - maglalabas ng lyric bubble
-            iconWrapper.addEventListener('click', function handleClick(event) {
-                event.stopPropagation();
-                
-                // Remove the click event listener after first click
-                iconWrapper.removeEventListener('click', handleClick);
-                
-                // Disable further clicks
-                iconWrapper.style.pointerEvents = 'none';
-                
-                // Check if there's already a message bubble
-                const existingBubble = iconWrapper.querySelector('.message-bubble');
-                if (existingBubble) {
-                    existingBubble.remove();
-                }
-                
-                const lyricBubble = document.createElement('div');
-                lyricBubble.className = 'message-bubble';
-                const randomLyric = lyrics[Math.floor(Math.random() * lyrics.length)];
-                lyricBubble.innerText = randomLyric;
-                
-                // Position the bubble above the icon
-                lyricBubble.style.bottom = 'calc(100% + 10px)';
-                lyricBubble.style.left = '50%';
-                iconWrapper.appendChild(lyricBubble);
-                
-               requestAnimationFrame(() => {
-                    lyricBubble.style.opacity = '1';
-                    lyricBubble.style.transform = 'translate(-50%, 0)';
-                });
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        createSpecialFallingIcon();
+        setInterval(() => {
+            if (activeIcons.length < 3 && Math.random() < 0.15) createSpecialFallingIcon();
+        }, 2000);
+    }, 1000);
 
-                setTimeout(() => {
-                    if (lyricBubble.parentNode) {
-                        lyricBubble.parentNode.removeChild(lyricBubble);
-                    }
-                }, 3000);
-            });
+    setInterval(() => {
+        activeIcons = activeIcons.filter(iconData => iconData.element.parentNode !== null);
+    }, 5000);
+});
 
-            clickMeContainer.appendChild(iconWrapper);
 
-            // auto-remove kapag tapos na bumagsak
-            setTimeout(() => {
-                if (iconWrapper.parentNode) {
-                    iconWrapper.parentNode.removeChild(iconWrapper);
-                }
-            }, 8000);
-        }
-
-        window.addEventListener('load', () => {
-            // Start creating icons after a delay
-            setTimeout(() => {
-                // Create first icon immediately
-                createSpecialFallingIcon();
-                
-                // Then set up the interval
-                setInterval(() => {
-                    if (Math.random() < 0.2) {
-                        createSpecialFallingIcon();
-                    }
-                }, 1000);
-            }, 1000);
-        });
-       // === COUNTDOWN (Interactive Boxes) ===
+// === COUNTDOWN (Interactive Boxes) ===
 const targetDate = new Date("2025-09-22T00:00:00+08:00");
 
 const countdownOverlay = document.getElementById("countdownOverlay");
@@ -647,6 +682,21 @@ function createBox(value, label, icon) {
     return div;
 }
 
+let countdownHeartsInterval;
+let countdownPetalsInterval;
+
+function startCountdownAnimations() {
+    // Start hearts and petals falling in the countdown overlay
+    countdownHeartsInterval = setInterval(createHearts1, 300);
+    countdownPetalsInterval = setInterval(createPetals1, 500);
+}
+
+function stopCountdownAnimations() {
+    // Stop the animations when countdown is over
+    clearInterval(countdownHeartsInterval);
+    clearInterval(countdownPetalsInterval);
+}
+
 function updateCountdown() {
     const now = new Date();
     const diff = targetDate - now;
@@ -656,10 +706,13 @@ function updateCountdown() {
         countdownOverlay.style.transition = "opacity 1.5s ease";
         countdownOverlay.style.opacity = "0";
 
+        // Stop countdown animations
+        stopCountdownAnimations();
+
         setTimeout(() => {
             countdownOverlay.style.display = "none";
-            for (let i = 0; i < 30; i++) setTimeout(createHearts, i * 80);
-            for (let i = 0; i < 25; i++) setTimeout(createPetals, i * 100);
+            for (let i = 0; i < 30; i++) setTimeout(createHearts1, i * 80);
+            for (let i = 0; i < 25; i++) setTimeout(createPetals1, i * 100);
             createConfetti();
             document.body.style.opacity = "0";
             document.body.style.transition = "opacity 1.5s ease";
@@ -671,6 +724,7 @@ function updateCountdown() {
         clearInterval(countdownInterval);
         return;
     }
+
 
     const days = Math.floor(diff / (1000 * 60 * 60 * 24));
     const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
@@ -695,178 +749,210 @@ function updateCountdown() {
 const countdownInterval = setInterval(updateCountdown, 1000);
 updateCountdown();
 
-    function createHearts() {
-        const heartsContainer = document.getElementById('heartsContainer');
-        const heart = document.createElement('div');
-        heart.classList.add('heart-fall');
-        heart.innerHTML = '<i class="fas fa-heart"></i>';
-        heart.style.left = Math.random() * 100 + 'vw';
-        heart.style.animationDuration = Math.random() * 3 + 2 + 's';
-        heartsContainer.appendChild(heart);
-        setTimeout(() => heart.remove(), 5000);
+function createHearts() {
+    const heartsContainer = document.getElementById('heartsContainer');
+    const heart = document.createElement('div');
+    heart.classList.add('heart-fall');
+    heart.innerHTML = '<i class="fas fa-heart"></i>';
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+    heartsContainer.appendChild(heart);
+    setTimeout(() => heart.remove(), 5000);
+}
+
+function createHearts1() {
+    const heartsContainer1 = document.getElementById('heartsContainer1');
+    const heart1 = document.createElement('div');
+    heart1.classList.add('heart-fall');
+    heart1.innerHTML = '<i class="fas fa-heart"></i>';
+    heart1.style.left = Math.random() * 100 + 'vw';
+    heart1.style.animationDuration = Math.random() * 3 + 2 + 's';
+    heartsContainer1.appendChild(heart1);
+    setTimeout(() => heart1.remove(), 5000);
+}
+
+// Gumawa ng bumabagsak na petals
+function createPetals() {
+    const petalsContainer = document.getElementById('petalsContainer');
+    const petal = document.createElement('div');
+    petal.classList.add('petal');
+    const flowerIcons = ['fas fa-star', 'fas fa-sparkles', 'fas fa-feather-alt', 'fas fa-seedling', 'fas fa-leaf', 'fas fa-spa'];
+    const randomIcon = flowerIcons[Math.floor(Math.random() * flowerIcons.length)];
+    petal.innerHTML = `<i class="${randomIcon}"></i>`;
+    petal.style.left = Math.random() * 100 + 'vw';
+    petal.style.animationDuration = Math.random() * 5 + 8 + 's';
+    petalsContainer.appendChild(petal);
+    setTimeout(() => petal.remove(), 15000);
+}
+
+function createPetals1() {
+    const petalsContainer1 = document.getElementById('petalsContainer1');
+    const petal1 = document.createElement('div');
+    petal1.classList.add('petal');
+const flowerIcons = [
+  // Original
+  'fas fa-star',
+  'fas fa-sparkles',
+  'fas fa-feather-alt',
+  'fas fa-seedling',
+  'fas fa-leaf',
+  'fas fa-spa',
+
+  // ❤️ Love & Hearts
+  'fas fa-heart',
+  'fas fa-heartbeat',
+  'fas fa-heart-broken',
+  'fas fa-kiss-wink-heart',
+  'fas fa-kiss-beam',
+  'fas fa-kiss',
+  'fas fa-grin-hearts',
+  'fas fa-grin-beam',
+  'fas fa-grin-stars',
+  'fas fa-star-half-alt',
+  'fas fa-star-and-crescent',
+
+  // 💍 Romantic & Relationship
+  'fas fa-ring',
+  'fas fa-gem',
+  'fas fa-cocktail',
+  'fas fa-music',
+  'fas fa-guitar',
+
+  // 🌹 Nature / Romantic Vibe
+  'fas fa-tree',
+  'fas fa-sun',
+  'fas fa-moon',
+  'fas fa-cloud-moon'
+];
+    const randomIcon = flowerIcons[Math.floor(Math.random() * flowerIcons.length)];
+    petal1.innerHTML = `<i class="${randomIcon}"></i>`;
+    petal1.style.left = Math.random() * 100 + 'vw';
+    petal1.style.animationDuration = Math.random() * 5 + 8 + 's';
+    petalsContainer1.appendChild(petal1);
+    setTimeout(() => petal1.remove(), 15000);
+}
+
+// Create floating flowers animation
+function createFloatingFlowers() {
+    const heartsContainer = document.getElementById('heartsContainer');
+    const flower = document.createElement('div');
+    flower.classList.add('heart-fall');
+    flower.style.fontSize = '25px';
+    flower.style.color = '#ff9eb5';
+    const flowerIcons = ['fas fa-seedling', 'fas fa-leaf', 'fas fa-cannabis', 'fas fa-spa'];
+    const randomIcon = flowerIcons[Math.floor(Math.random() * flowerIcons.length)];
+    flower.innerHTML = `<i class="${randomIcon}"></i>`;
+    flower.style.left = Math.random() * 100 + 'vw';
+    flower.style.animationDuration = Math.random() * 4 + 3 + 's';
+    heartsContainer.appendChild(flower);
+    setTimeout(() => flower.remove(), 7000);
+}
+
+// Flower explosion for countdown en
+
+// Confetti para sa surprise
+function createConfetti() {
+    const colors = ['#ff4d4d', '#ff9eb5', '#ff6b6b', '#ffb6c1', '#d46a6a'];
+    for (let i = 0; i < 50; i++) {
+        const confetti = document.createElement('div');
+        confetti.classList.add('confetti');
+        confetti.style.left = Math.random() * 100 + 'vw';
+        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.width = (Math.random() * 10 + 5) + 'px';
+        confetti.style.height = (Math.random() * 10 + 5) + 'px';
+        confetti.style.animationDuration = (Math.random() * 3 + 3) + 's';
+        document.body.appendChild(confetti);
+        setTimeout(() => confetti.remove(), 6000);
+    }
+}
+
+const loveMessages = [
+    "Hindi ko alam kung anong ginawa ko sa buhay para maging akin ka.",
+    "Sa bawat gising ko, pangalan mo agad ang naiisip ko.",
+    "Nawawala ang pagod at stress ko sa tuwing kausap kita.",
+    "Ang saya saya ko tuwing naririnig ko yung boses at tawa mo.",
+    "Minsan iniisip ko, paano kung hindi kita nakilala? Buti na lang nakilala kita.",
+    "Gusto ko lang malaman mo na ikaw ang paborito kong tao sa buong mundo.",
+    "Sa dami ng tao sa mundo, sayo lang tumibok ang puso ko.",
+    "Kahit anong mangyari, ikaw at ikaw pa rin ang pipiliin ko.",
+    "Hindi ko na kailangan ng kahit ano pa, basta ikaw ang kasama ko.",
+    "Ikaw ang dahilan kung bakit lagi akong inspired sa araw-araw.",
+    "Kapag hinahawakan mo kamay ko, pakiramdam ko safe ako kahit saan.",
+    "Wala akong ibang gusto kundi mahalin ka araw-araw.",
+    "Hindi ko man nasasabi palagi, pero sobrang proud ako sayo.",
+    "Gusto ko lang ipaalam sayo, hindi ako magsasawang mahalin ka.",
+    "Sa lahat ng pangarap ko sa buhay, gusto ko palagi kang andoon.",
+    "Ikaw ang paborito kong goodnight message at good morning text.",
+    "Walang katapusan tong pagmamahalan natin.",
+    "Araw-araw kita namimiss.",
+    "Ikaw ang dahilan kung bakit ang ganda ng tingin ko sa buhay.",
+    "Walang araw na hindi kita naiisip.",
+    "Ikaw ang pinakamagandang bagay na dumating sa buhay ko.",
+    "Kung tatanungin ako kung anong gusto ko araw-araw, ang sagot ko ay ikaw.",
+    "Kahit anong mangyari, ikaw ang unang gusto kong makasama.",
+    "Ang ganda ng mundo kapag ikaw ang kausap ko.",
+];
+
+let availableMessages = [...loveMessages];
+
+document.getElementById('loveMessageBtn').addEventListener('click', function() {
+    const messageDiv = document.getElementById('randomMessage');
+    const btn = document.getElementById('loveMessageBtn');
+    
+    // Button animation
+    btn.style.transform = 'scale(0.95)';
+    setTimeout(() => {
+        btn.style.transform = 'scale(1)';
+    }, 150);
+    
+    // Reset messages kapag naubos na lahat
+    if (availableMessages.length === 0) {
+        availableMessages = [...loveMessages];
     }
 
-    // Gumawa ng bumabagsak na petals
-    function createPetals() {
-        const petalsContainer = document.getElementById('petalsContainer');
-        const petal = document.createElement('div');
-        petal.classList.add('petal');
-        const flowerIcons = ['fas fa-seedling', 'fas fa-leaf', 'fas fa-spa'];
-        const randomIcon = flowerIcons[Math.floor(Math.random() * flowerIcons.length)];
-        petal.innerHTML = `<i class="${randomIcon}"></i>`;
-        petal.style.left = Math.random() * 100 + 'vw';
-        petal.style.animationDuration = Math.random() * 5 + 8 + 's';
-        petalsContainer.appendChild(petal);
-        setTimeout(() => petal.remove(), 15000);
+    // Piliin random message na hindi pa lumalabas
+    const randomIndex = Math.floor(Math.random() * availableMessages.length);
+    const selectedMessage = availableMessages[randomIndex];
+
+    // Tanggalin yung napili para hindi maulit
+    availableMessages.splice(randomIndex, 1);
+
+    // Display message
+    messageDiv.innerHTML = `<i class="fas fa-heart" style="color: #ff4d4d; margin-right: 8px;"></i>${selectedMessage}`;
+    messageDiv.style.display = 'block';
+    messageDiv.style.opacity = '0';
+    
+    setTimeout(() => {
+        messageDiv.style.opacity = '1';
+    }, 100);
+    
+    // Create hearts animation
+    for (let i = 0; i < 10; i++) {
+        setTimeout(createHearts, i * 100);
     }
+});
 
-    // Create floating flowers animation
-    function createFloatingFlowers() {
-        const heartsContainer = document.getElementById('heartsContainer');
-        const flower = document.createElement('div');
-        flower.classList.add('heart-fall');
-        flower.style.fontSize = '25px';
-        flower.style.color = '#ff9eb5';
-        const flowerIcons = ['fas fa-seedling', 'fas fa-leaf', 'fas fa-cannabis', 'fas fa-spa'];
-        const randomIcon = flowerIcons[Math.floor(Math.random() * flowerIcons.length)];
-        flower.innerHTML = `<i class="${randomIcon}"></i>`;
-        flower.style.left = Math.random() * 100 + 'vw';
-        flower.style.animationDuration = Math.random() * 4 + 3 + 's';
-        heartsContainer.appendChild(flower);
-        setTimeout(() => flower.remove(), 7000);
-    }
+setInterval(createHearts, 300);
+setInterval(createPetals, 500);
+setInterval(createHearts1, 300);
+setInterval(createPetals1, 500);
+setInterval(createFloatingFlowers, 1000);
 
-    // Flower explosion for countdown end
-    function createFlowerExplosion() {
-        const heartsContainer = document.getElementById('heartsContainer');
-        const flower = document.createElement('div');
-        flower.style.position = 'fixed';
-        flower.style.top = '50%';
-        flower.style.left = '50%';
-        flower.style.fontSize = '30px';
-        flower.style.color = '#ff4d4d';
-        flower.style.zIndex = '10000';
-        flower.style.pointerEvents = 'none';
-        
-        const flowerIcons = ['fas fa-heart', 'fas fa-seedling', 'fas fa-leaf', 'fas fa-spa', 'fas fa-cannabis'];
-        const randomIcon = flowerIcons[Math.floor(Math.random() * flowerIcons.length)];
-        flower.innerHTML = `<i class="${randomIcon}"></i>`;
-        
-        // Random direction explosion
-        const angle = Math.random() * Math.PI * 2;
-        const distance = Math.random() * 300 + 100;
-        const endX = Math.cos(angle) * distance;
-        const endY = Math.sin(angle) * distance;
-        
-        flower.style.animation = `explosion 2s ease-out forwards`;
-        flower.style.setProperty('--end-x', endX + 'px');
-        flower.style.setProperty('--end-y', endY + 'px');
-        
-        heartsContainer.appendChild(flower);
-        setTimeout(() => flower.remove(), 2000);
-    }
+function sendKiss() {
+    const kissMessage = document.getElementById('kiss-message');
+    kissMessage.style.display = 'block';
+    kissMessage.style.opacity = '1';
+    for (let i = 0; i < 20; i++) setTimeout(createHearts, i * 100);
+    for (let i = 0; i < 15; i++) setTimeout(createPetals, i * 100);
+    for (let i = 0; i < 10; i++) setTimeout(createFloatingFlowers, i * 150);
+    setTimeout(() => {
+        kissMessage.style.opacity = '0';
+        setTimeout(() => kissMessage.style.display = 'none', 500);
+    }, 4000);
+}
 
-    // Confetti para sa surprise
-    function createConfetti() {
-        const colors = ['#ff4d4d', '#ff9eb5', '#ff6b6b', '#ffb6c1', '#d46a6a'];
-        for (let i = 0; i < 50; i++) {
-            const confetti = document.createElement('div');
-            confetti.classList.add('confetti');
-            confetti.style.left = Math.random() * 100 + 'vw';
-            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-            confetti.style.width = (Math.random() * 10 + 5) + 'px';
-            confetti.style.height = (Math.random() * 10 + 5) + 'px';
-            confetti.style.animationDuration = (Math.random() * 3 + 3) + 's';
-            document.body.appendChild(confetti);
-            setTimeout(() => confetti.remove(), 6000);
-        }
-    }
-
-    const loveMessages = [
-        "Hindi ko alam kung anong ginawa ko sa buhay para maging akin ka.",
-        "Sa bawat gising ko, pangalan mo agad ang naiisip ko.",
-        "Nawawala ang pagod at stress ko sa tuwing kausap kita.",
-        "Ang saya saya ko tuwing naririnig ko yung boses at tawa mo.",
-        "Minsan iniisip ko, paano kung hindi kita nakilala? Buti na lang nakilala kita.",
-        "Gusto ko lang malaman mo na ikaw ang paborito kong tao sa buong mundo.",
-        "Sa dami ng tao sa mundo, sayo lang tumibok ang puso ko.",
-        "Kahit anong mangyari, ikaw at ikaw pa rin ang pipiliin ko.",
-        "Hindi ko na kailangan ng kahit ano pa, basta ikaw ang kasama ko.",
-        "Ikaw ang dahilan kung bakit lagi akong inspired sa araw-araw.",
-        "Kapag hinahawakan mo kamay ko, pakiramdam ko safe ako kahit saan.",
-        "Wala akong ibang gusto kundi mahalin ka araw-araw.",
-        "Hindi ko man nasasabi palagi, pero sobrang proud ako sayo.",
-        "Gusto ko lang ipaalam sayo, hindi ako magsasawang mahalin ka.",
-        "Sa lahat ng pangarap ko sa buhay, gusto ko palagi kang andoon.",
-        "Ikaw ang paborito kong goodnight message at good morning text.",
-        "Walang katapusan tong pagmamahalan natin.",
-        "Araw-araw kita namimiss.",
-        "Ikaw ang dahilan kung bakit ang ganda ng tingin ko sa buhay.",
-        "Walang araw na hindi kita naiisip.",
-        "Ikaw ang pinakamagandang bagay na dumating sa buhay ko.",
-        "Kung tatanungin ako kung anong gusto ko araw-araw, ang sagot ko ay ikaw.",
-        "Kahit anong mangyari, ikaw ang unang gusto kong makasama.",
-        "Ang ganda ng mundo kapag ikaw ang kausap ko.",
-    ];
-
-    let availableMessages = [...loveMessages];
-
-    document.getElementById('loveMessageBtn').addEventListener('click', function() {
-        const messageDiv = document.getElementById('randomMessage');
-        const btn = document.getElementById('loveMessageBtn');
-        
-        // Button animation
-        btn.style.transform = 'scale(0.95)';
-        setTimeout(() => {
-            btn.style.transform = 'scale(1)';
-        }, 150);
-        
-        // Reset messages kapag naubos na lahat
-        if (availableMessages.length === 0) {
-            availableMessages = [...loveMessages];
-        }
-
-        // Piliin random message na hindi pa lumalabas
-        const randomIndex = Math.floor(Math.random() * availableMessages.length);
-        const selectedMessage = availableMessages[randomIndex];
-
-        // Tanggalin yung napili para hindi maulit
-        availableMessages.splice(randomIndex, 1);
-
-        // Display message
-        messageDiv.innerHTML = `<i class="fas fa-heart" style="color: #ff4d4d; margin-right: 8px;"></i>${selectedMessage}`;
-        messageDiv.style.display = 'block';
-        messageDiv.style.opacity = '0';
-        
-        setTimeout(() => {
-            messageDiv.style.opacity = '1';
-        }, 100);
-        
-        // Create hearts animation
-        for (let i = 0; i < 10; i++) {
-            setTimeout(createHearts, i * 100);
-        }
-    });
-
-    setInterval(createHearts, 300);
-    setInterval(createPetals, 500);
-    setInterval(createFloatingFlowers, 1000);
-
-    function sendKiss() {
-        const kissMessage = document.getElementById('kiss-message');
-        kissMessage.style.display = 'block';
-        kissMessage.style.opacity = '1';
-        for (let i = 0; i < 20; i++) setTimeout(createHearts, i * 100);
-        for (let i = 0; i < 15; i++) setTimeout(createPetals, i * 100);
-        for (let i = 0; i < 10; i++) setTimeout(createFloatingFlowers, i * 150);
-        setTimeout(() => {
-            kissMessage.style.opacity = '0';
-            setTimeout(() => kissMessage.style.display = 'none', 500);
-        }, 4000);
-    }
-
-    // 30 reasons ❤️
-    const reasons = [
+// 30 reasons ❤️
+const reasons = [
   { icon: "fas fa-smile", text: "Dahil napapangiti mo ako kahit wala kang ginagawa." },
   { icon: "fas fa-bed", text: "Dahil ako palagi ang una mong iniisip pagkagising at huling iniisip bago matulog." },
   { icon: "fas fa-hand-holding-heart", text: "Dahil palagi mong pinaparamdam na importante ako." },
@@ -899,77 +985,78 @@ updateCountdown();
   { icon: "fas fa-heart", text: "Dahil ang ganda-ganda mo at hindi ko mapigilang mahalin ka lagi." }
 ];
 
-    const reasonDisplayBtn = document.getElementById('reasonDisplayBtn');
-    const singleReason = document.getElementById('singleReason');
-    const surpriseBtn = document.getElementById('surpriseBtn');
-    const surpriseContent = document.getElementById('surpriseContent');
+const reasonDisplayBtn = document.getElementById('reasonDisplayBtn');
+const singleReason = document.getElementById('singleReason');
+const surpriseBtn = document.getElementById('surpriseBtn');
+const surpriseContent = document.getElementById('surpriseContent');
 
-    let currentReasonIndex = 0;
+let currentReasonIndex = 0;
 
-    function showNextReason() {
-        singleReason.style.opacity = '0';
-        setTimeout(() => {
-            if (currentReasonIndex < reasons.length) {
-                singleReason.style.display = 'block';
-                singleReason.innerHTML = `
-                    <div class="reason-number">Reason #${currentReasonIndex + 1}</div>
-                    <div class="reason-icon"><i class="${reasons[currentReasonIndex].icon}"></i></div>
-                    <div class="reason-text">${reasons[currentReasonIndex].text}</div>
-                `;
-                currentReasonIndex++;
-                for (let i = 0; i < 5; i++) setTimeout(createHearts, i * 100);
-                if (currentReasonIndex === reasons.length) {
-                    reasonDisplayBtn.innerHTML = '<i class="fas fa-heart"></i> View Again';
-                }
-            } else {
-                currentReasonIndex = 0;
-                showNextReason();
-                reasonDisplayBtn.innerHTML = '<i class="fas fa-heart"></i>  View Again';
+function showNextReason() {
+    singleReason.style.opacity = '0';
+    setTimeout(() => {
+        if (currentReasonIndex < reasons.length) {
+            singleReason.style.display = 'block';
+            singleReason.innerHTML = `
+                <div class="reason-number">Reason #${currentReasonIndex + 1}</div>
+                <div class="reason-icon"><i class="${reasons[currentReasonIndex].icon}"></i></div>
+                <div class="reason-text">${reasons[currentReasonIndex].text}</div>
+            `;
+            currentReasonIndex++;
+            for (let i = 0; i < 5; i++) setTimeout(createHearts, i * 100);
+            if (currentReasonIndex === reasons.length) {
+                reasonDisplayBtn.innerHTML = '<i class="fas fa-heart"></i> View Again';
             }
-            singleReason.style.opacity = '1';
-        }, 200);
-    }
-
-    reasonDisplayBtn.addEventListener('click', showNextReason);
-
-    if (surpriseBtn) {
-        surpriseBtn.addEventListener('click', function() {
-            surpriseContent.style.display = 'block';
-            surpriseContent.style.opacity = '0';
-            setTimeout(() => {
-                surpriseContent.style.opacity = '1';
-                createConfetti();
-                surpriseContent.classList.add('rumble');
-                setTimeout(() => surpriseContent.classList.remove('rumble'), 1000);
-            }, 200);
-        });
-    }
-
-    // Music control
-    const musicControl = document.getElementById('musicControl');
-    const bgMusic = document.getElementById('bgMusic');
-    let isPlaying = false;
-
-    musicControl.addEventListener('click', function () {
-        if (isPlaying) {
-            bgMusic.pause();
-            musicControl.innerHTML = '<i class="fas fa-music"></i>';
         } else {
-            bgMusic.play();
-            musicControl.innerHTML = '<i class="fas fa-pause"></i>';
+            currentReasonIndex = 0;
+            showNextReason();
+            reasonDisplayBtn.innerHTML = '<i class="fas fa-heart"></i>  View Again';
         }
-        isPlaying = !isPlaying;
-    });
+        singleReason.style.opacity = '1';
+    }, 200);
+}
 
-    window.addEventListener('load', () => {
+reasonDisplayBtn.addEventListener('click', showNextReason);
+
+if (surpriseBtn) {
+    surpriseBtn.addEventListener('click', function() {
+        surpriseContent.style.display = 'block';
+        surpriseContent.style.opacity = '0';
         setTimeout(() => {
-            bgMusic.play().then(() => {
-                isPlaying = true;
-                musicControl.innerHTML = '<i class="fas fa-pause"></i>';
-            }).catch(() => {});
-        }, 1000);
+            surpriseContent.style.opacity = '1';
+            createConfetti();
+            surpriseContent.classList.add('rumble');
+            setTimeout(() => surpriseContent.classList.remove('rumble'), 1000);
+        }, 200);
     });
-</script>
+}
+
+// Music control
+const musicControl = document.getElementById('musicControl');
+const bgMusic = document.getElementById('bgMusic');
+let isPlaying = false;
+
+musicControl.addEventListener('click', function () {
+    if (isPlaying) {
+        bgMusic.pause();
+        musicControl.innerHTML = '<i class="fas fa-music"></i>';
+    } else {
+        bgMusic.play();
+        musicControl.innerHTML = '<i class="fas fa-pause"></i>';
+    }
+    isPlaying = !isPlaying;
+});
+
+window.addEventListener('load', () => {
+    startCountdownAnimations();
+    setTimeout(() => {
+        bgMusic.play().then(() => {
+            isPlaying = true;
+            musicControl.innerHTML = '<i class="fas fa-pause"></i>';
+        }).catch(() => {});
+    }, 1000);
+});
+    </script>
 
 </body>
 </html>
