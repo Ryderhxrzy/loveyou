@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="google" content="notranslate">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unang Buwan Natin</title>
+    <title>I Love You</title>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="style.css">
@@ -503,11 +503,33 @@
         </footer>
 
     <!-- Audio para sa background music -->
-    <audio id="bgMusic" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-    </audio>
-
+    <audio id="bgMusic" loop></audio>
+    
     <script>
+        const musicList = [
+  "mahika.mp3",
+  "ito lamang.mp3",
+  "panata.mp3"
+];
+
+let currentIndex = 0;
+const audio = document.getElementById("bgMusic");
+
+window.addEventListener("DOMContentLoaded", () => {
+  audio.src = musicList[currentIndex];
+  audio.play().catch(() => {
+    console.log("Autoplay blocked, waiting for user interaction...");
+    document.body.addEventListener("click", () => audio.play(), { once: true });
+  });
+});
+
+// Pagkatapos ng kanta, lipat sa susunod
+audio.addEventListener("ended", () => {
+  currentIndex = (currentIndex + 1) % musicList.length;
+  audio.src = musicList[currentIndex];
+  audio.play();
+});
+
        const lyrics = [
     '<i class="fas fa-heart"></i> Sa dami ng tao sa mundo, buti na lang ikaw ang nahanap ko.',
     '<i class="fas fa-envelope"></i> Alam mo ba? ikaw ang pinakamagandang nangyari sa buhay ko.',
